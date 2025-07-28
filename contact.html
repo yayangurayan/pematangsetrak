@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kontak Desa Pematang Setrak</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/animations.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Tambahan style khusus untuk halaman kontak */
+        .contact-section {
+            padding: 80px 0;
+        }
+        
+        .contact-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 50px;
+            align-items: center;
+        }
+        
+        .contact-info {
+            padding: 30px;
+        }
+        
+        .contact-info h2 {
+            color: var(--dark-green);
+            margin-bottom: 25px;
+            font-size: 2rem;
+        }
+        
+        .contact-details {
+            margin-bottom: 30px;
+        }
+        
+        .contact-details p {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+        }
+        
+        .contact-details i {
+            width: 40px;
+            height: 40px;
+            background: var(--dark-green);
+            color: var(--white);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            flex-shrink: 0;
+        }
+        
+        .contact-map {
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+            height: 450px;
+        }
+        
+        .contact-map iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        
+        .whatsapp-btn {
+            display: inline-flex;
+            align-items: center;
+            background: #25D366;
+            color: var(--white);
+            padding: 15px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .whatsapp-btn:hover {
+            background: #128C7E;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .whatsapp-btn i {
+            font-size: 1.5rem;
+            margin-right: 10px;
+        }
+        
+        .breadcrumb-section {
+            background-color: var(--light-gray);
+            padding: 20px 0;
+            margin-top: 80px;
+        }
+        
+        .breadcrumb {
+            display: flex;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .breadcrumb-item {
+            font-size: 0.9rem;
+            color: var(--gray);
+        }
+        
+        .breadcrumb-item + .breadcrumb-item::before {
+            content: '/';
+            padding: 0 10px;
+            color: var(--gray);
+        }
+        
+        .breadcrumb-item a {
+            color: var(--dark-green);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .breadcrumb-item a:hover {
+            color: var(--light-green);
+            text-decoration: underline;
+        }
+        
+        .breadcrumb-item.active {
+            color: var(--dark-gray);
+        }
+        
+        @media (max-width: 768px) {
+            .contact-map {
+                height: 300px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header dan Navigasi -->
+    <header class="sticky-header">
+        <div class="container">
+            <div class="logo">
+                <h1>Desa Pematang Setrak</h1>
+            </div>
+            <nav>
+                <ul class="nav-menu">
+                    <li><a href="index.html">Beranda</a></li>
+                    <li>
+                        <a href="about.html">Tentang Desa <i class="fas fa-chevron-down"></i></a>
+                        <ul class="dropdown">
+                            <li><a href="about.html#sejarah">Sejarah Desa</a></li>
+                            <li><a href="about.html#visi-misi">Visi dan Misi</a></li>
+                            <li><a href="about.html#profil-wilayah">Profil Wilayah</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="government.html">Pemerintahan</a></li>
+                    <li><a href="potentials.html">Potensi Desa</a></li>
+                    <li><a href="news.html">Berita Utama</a></li>
+                    <li><a href="gallery.html">Galeri</a></li>
+                    <li class="active"><a href="contact.html">Kontak</a></li>
+                </ul>
+                <div class="hamburger">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Breadcrumb -->
+    <section class="breadcrumb-section">
+        <div class="container">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="index.html">Beranda</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Kontak Desa</li>
+                </ol>
+            </nav>
+        </div>
+    </section>
+
+    <!-- Page Title -->
+    <section class="page-title-section">
+        <div class="container">
+            <h1 data-aos="fade-up">Kontak Desa</h1>
+            <p data-aos="fade-up" data-aos-delay="100">Hubungi kami untuk informasi lebih lanjut</p>
+        </div>
+    </section>
+
+    <!-- Konten Kontak -->
+    <section class="contact-section">
+        <div class="container">
+            <div class="contact-container">
+                <div class="contact-info" data-aos="fade-right">
+                    <h2>Hubungi Kami</h2>
+                    <p>Kami terbuka untuk kritik, saran, maupun pertanyaan dari masyarakat. Silakan hubungi kami melalui informasi kontak berikut atau kunjungi langsung kantor desa kami pada jam kerja.</p>
+                    
+                    <div class="contact-details">
+                        <p>
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Jalan Besar Pematang Setrak No. 01, Dusun Induk, Kecamatan Kualuh Hulu, Kabupaten Labuhanbatu Utara, Sumatera Utara.</span>
+                        </p>
+                        <p>
+                            <i class="fas fa-envelope"></i>
+                            <span>desapematangsetrak@gmail.com</span>
+                        </p>
+                        <p>
+                            <i class="fas fa-phone-alt"></i>
+                            <span>0812-3456-7890 (Sekretariat Desa)</span>
+                        </p>
+                        <p>
+                            <i class="fas fa-clock"></i>
+                            <span>Senin - Jumat, pukul 08.00 - 15.00 WIB</span>
+                        </p>
+                    </div>
+                    
+                    <a href="https://wa.me/6281234567890" class="whatsapp-btn" target="_blank">
+                        <i class="fab fa-whatsapp"></i>
+                        Kirim Pesan via WhatsApp
+                    </a>
+                </div>
+                
+                <div class="contact-map" data-aos="fade-left" data-aos-delay="100">
+                    <!-- Peta Google Maps -->
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d127672.75772082225!2d99.5337845!3d2.333333!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x302e05fd5e8c5e39%3A0x6e9a17ca9507b6a6!2sLabuhan%20Batu%20Regency%2C%20North%20Sumatra!5e0!3m2!1sen!2sid!4v1689587890120!5m2!1sen!2sid" allowfullscreen="" loading="lazy"></iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Tentang Desa</h3>
+                    <p><strong>Desa Pematang Setrak</strong> adalah desa yang terletak di Kecamatan Kualuh Hulu, Kabupaten Labuhanbatu Utara, Provinsi Sumatera Utara. Kami berkomitmen membangun desa yang transparan, informatif, dan inovatif melalui teknologi digital untuk pelayanan yang lebih baik kepada masyarakat.</p>
+                </div>
+                <div class="footer-column">
+                    <h3>Navigasi Cepat</h3>
+                    <ul>
+                        <li><a href="index.html">Beranda</a></li>
+                        <li><a href="about.html">Profil Desa</a></li>
+                        <li><a href="government.html">Pemerintahan</a></li>
+                        <li><a href="potentials.html">Potensi Desa</a></li>
+                        <li><a href="news.html">Berita Utama</a></li>
+                        <li><a href="gallery.html">Galeri</a></li>
+                        <li><a href="contact.html">Kontak</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Kontak & Media Sosial</h3>
+                    <ul class="contact-info">
+                        <li><i class="fas fa-envelope"></i> desapematangsetrak@gmail.com</li>
+                        <li><i class="fab fa-whatsapp"></i> 0812-3456-7890</li>
+                        <li><i class="fas fa-map-marker-alt"></i> Jl. Besar Pematang Setrak No. 01, Kualuh Hulu, Labuhanbatu Utara</li>
+                    </ul>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>© 2025 Desa Pematang Setrak. Seluruh hak cipta dilindungi undang-undang.</p>
+                <p>Dibangun dengan dedikasi untuk keterbukaan informasi dan pelayanan masyarakat desa.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="assets/js/script.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        // Inisialisasi AOS (Animate On Scroll)
+        AOS.init({
+            duration: 800,
+            once: true
+        });
+    </script>
+</body>
+</html>

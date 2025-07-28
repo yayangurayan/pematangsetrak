@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Galeri Desa Pematang Setrak</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/animations.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/2.7.1/css/lightgallery.min.css">
+    <style>
+        /* Tambahan style khusus untuk halaman galeri */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        
+        .gallery-item {
+            position: relative;
+            border-radius: 10px;
+            overflow: hidden;
+            height: 300px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .gallery-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+        
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+        
+        .gallery-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 15px;
+            background: rgba(32, 78, 46, 0.8);
+            color: var(--white);
+            transform: translateY(100%);
+            transition: transform 0.3s ease;
+        }
+        
+        .gallery-item:hover .gallery-overlay {
+            transform: translateY(0);
+        }
+        
+        .gallery-overlay h3 {
+            font-size: 1.1rem;
+            margin-bottom: 5px;
+        }
+        
+        .gallery-overlay p {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+        
+        .category-filter {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin: 40px 0;
+        }
+        
+        .filter-btn {
+            background: transparent;
+            border: 2px solid var(--dark-green);
+            color: var(--dark-green);
+            padding: 8px 20px;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+        
+        .filter-btn:hover, .filter-btn.active {
+            background: var(--dark-green);
+            color: var(--white);
+        }
+        
+        .breadcrumb-section {
+            background-color: var(--light-gray);
+            padding: 20px 0;
+            margin-top: 80px;
+        }
+        
+        .breadcrumb {
+            display: flex;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .breadcrumb-item {
+            font-size: 0.9rem;
+            color: var(--gray);
+        }
+        
+        .breadcrumb-item + .breadcrumb-item::before {
+            content: '/';
+            padding: 0 10px;
+            color: var(--gray);
+        }
+        
+        .breadcrumb-item a {
+            color: var(--dark-green);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .breadcrumb-item a:hover {
+            color: var(--light-green);
+            text-decoration: underline;
+        }
+        
+        .breadcrumb-item.active {
+            color: var(--dark-gray);
+        }
+        
+        /* Lightbox Customization */
+        .lg-backdrop {
+            background-color: rgba(0, 0, 0, 0.9);
+        }
+        
+        .lg-outer .lg-toogle-thumb, 
+        .lg-outer .lg-download {
+            display: none;
+        }
+        
+        .lg-sub-html {
+            background: rgba(0, 0, 0, 0.7);
+            padding: 15px 20px;
+            text-align: center;
+        }
+        
+        .lg-sub-html h4 {
+            color: var(--white);
+            margin-bottom: 5px;
+            font-size: 1.2rem;
+        }
+        
+        .lg-sub-html p {
+            color: var(--light-gray);
+            font-size: 0.9rem;
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header dan Navigasi -->
+    <header class="sticky-header">
+        <div class="container">
+            <div class="logo">
+                <h1>Desa Pematang Setrak</h1>
+            </div>
+            <nav>
+                <ul class="nav-menu">
+                    <li><a href="index.html">Beranda</a></li>
+                    <li>
+                        <a href="about.html">Tentang Desa <i class="fas fa-chevron-down"></i></a>
+                        <ul class="dropdown">
+                            <li><a href="about.html#sejarah">Sejarah Desa</a></li>
+                            <li><a href="about.html#visi-misi">Visi dan Misi</a></li>
+                            <li><a href="about.html#profil-wilayah">Profil Wilayah</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="government.html">Pemerintahan</a></li>
+                    <li><a href="potentials.html">Potensi Desa</a></li>
+                    <li><a href="news.html">Berita Utama</a></li>
+                    <li class="active"><a href="gallery.html">Galeri</a></li>
+                    <li><a href="contact.html">Kontak</a></li>
+                </ul>
+                <div class="hamburger">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Breadcrumb -->
+    <section class="breadcrumb-section">
+        <div class="container">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="index.html">Beranda</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Galeri Desa</li>
+                </ol>
+            </nav>
+        </div>
+    </section>
+
+    <!-- Page Title -->
+    <section class="page-title-section">
+        <div class="container">
+            <h1 data-aos="fade-up">Galeri Desa</h1>
+            <p data-aos="fade-up" data-aos-delay="100">Dokumentasi Kegiatan dan Keindahan Desa Pematang Setrak</p>
+        </div>
+    </section>
+
+    <!-- Deskripsi Galeri -->
+    <section class="section">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <div class="divider"></div>
+                <p>Selamat datang di galeri Desa Pematang Setrak. Di sini Anda dapat melihat berbagai dokumentasi kegiatan masyarakat, potret keindahan alam desa, serta momen penting yang menjadi bagian dari sejarah dan identitas desa kami.</p>
+                <p>Semua gambar bersifat informatif dan akan diperbarui secara berkala seiring berlangsungnya kegiatan pembangunan dan sosial di desa.</p>
+            </div>
+            
+            <!-- Filter Kategori -->
+            <div class="category-filter" data-aos="fade-up">
+                <button class="filter-btn active" data-filter="all">Semua</button>
+                <button class="filter-btn" data-filter="kegiatan">Kegiatan</button>
+                <button class="filter-btn" data-filter="alam">Pemandangan Alam</button>
+                <button class="filter-btn" data-filter="infrastruktur">Infrastruktur</button>
+                <button class="filter-btn" data-filter="acara">Acara Khusus</button>
+            </div>
+            
+            <!-- Grid Galeri -->
+            <div id="gallery-container" class="gallery-grid">
+                <!-- Item 1 -->
+                <div class="gallery-item" data-aos="zoom-in" data-src="https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" data-category="kegiatan" data-sub-html="<h4>Gotong Royong Warga</h4><p>Gotong Royong Warga -- April 2025</p>">
+                    <img src="https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Gotong Royong">
+                    <div class="gallery-overlay">
+                        <h3>Gotong Royong Warga</h3>
+                        <p>April 2025</p>
+                    </div>
+                </div>
+                
+                <!-- Item 2 -->
+                <div class="gallery-item" data-aos="zoom-in" data-aos-delay="100" data-src="https://images.unsplash.com/photo-1581578021016-4b7d1a1d3c3c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" data-category="kegiatan" data-sub-html="<h4>Panen Raya Kelapa Sawit</h4><p>Panen Raya Dusun Suka Makmur -- Maret 2025</p>">
+                    <img src="https://images.unsplash.com/photo-1581578021016-4b7d1a1d3c3c?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Panen Raya">
+                    <div class="gallery-overlay">
+                        <h3>Panen Raya Kelapa Sawit</h3>
+                        <p>Maret 2025</p>
+                    </div>
+                </div>
+                
+                <!-- Item 3 -->
+                <div class="gallery-item" data-aos="zoom-in" data-aos-delay="200" data-src="https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" data-category="kegiatan" data-sub-html="<h4>Posyandu Balita</h4><p>Posyandu Balita -- Februari 2025</p>">
+                    <img src="https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Posyandu">
+                    <div class="gallery-overlay">
+                        <h3>Posyandu Balita</h3>
+                        <p>Februari 2025</p>
+                    </div>
+                </div>
+                
+                <!-- Item 4 -->
+                <div class="gallery-item" data-aos="zoom-in" data-aos-delay="300" data-src="https://images.unsplash.com/photo-1473448912268-2022ce9509d8?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" data-category="alam" data-sub-html="<h4>Senja di Setrak Jaya</h4><p>Senja di Setrak Jaya -- Januari 2025</p>">
+                    <img src="https://images.unsplash.com/photo-1473448912268-2022ce9509d8?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Pemandangan Senja">
+                    <div class="gallery-overlay">
+                        <h3>Senja di Setrak Jaya</h3>
+                        <p>Januari 2025</p>
+                    </div>
+                </div>
+                
+                <!-- Item 5 -->
+                <div class="gallery-item" data-aos="zoom-in" data-aos-delay="400" data-src="https://images.unsplash.com/photo-1511818966892-d7d671e672a2?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" data-category="acara" data-sub-html="<h4>Semarak HUT RI ke-80</h4><p>Semarak HUT RI ke-80 -- Agustus 2025</p>">
+                    <img src="https://images.unsplash.com/photo-1511818966892-d7d671e672a2?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="HUT RI">
+                    <div class="gallery-overlay">
+                        <h3>Semarak HUT RI ke-80</h3>
+                        <p>Agustus 2025</p>
+                    </div>
+                </div>
+                
+                <!-- Item 6 -->
+                <div class="gallery-item" data-aos="zoom-in" data-aos-delay="100" data-src="https://images.unsplash.com/photo-1596199050105-6d5c1f4b7b3c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" data-category="infrastruktur" data-sub-html="<h4>Kantor Desa</h4><p>Kantor Desa Pematang Setrak</p>">
+                    <img src="https://images.unsplash.com/photo-1596199050105-6d5c1f4b7b3c?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Kantor Desa">
+                    <div class="gallery-overlay">
+                        <h3>Kantor Desa</h3>
+                        <p>Bangunan utama pemerintahan</p>
+                    </div>
+                </div>
+                
+                <!-- Item 7 -->
+                <div class="gallery-item" data-aos="zoom-in" data-aos-delay="200" data-src="https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" data-category="alam" data-sub-html="<h4>Perkebunan Sawit</h4><p>Hamparan perkebunan kelapa sawit di Dusun Suka Makmur</p>">
+                    <img src="https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Perkebunan Sawit">
+                    <div class="gallery-overlay">
+                        <h3>Perkebunan Sawit</h3>
+                        <p>Dusun Suka Makmur</p>
+                    </div>
+                </div>
+                
+                <!-- Item 8 -->
+                <div class="gallery-item" data-aos="zoom-in" data-aos-delay="300" data-src="https://images.unsplash.com/photo-1604176354204-9268737828e4?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" data-category="kegiatan" data-sub-html="<h4>Kerajinan Tangan</h4><p>Proses pembuatan kerajinan tangan oleh UMKM desa</p>">
+                    <img src="https://images.unsplash.com/photo-1604176354204-9268737828e4?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Kerajinan Tangan">
+                    <div class="gallery-overlay">
+                        <h3>Kerajinan Tangan</h3>
+                        <p>Produk UMKM Desa</p>
+                    </div>
+                </div>
+                
+                <!-- Item 9 -->
+                <div class="gallery-item" data-aos="zoom-in" data-aos-delay="400" data-src="https://images.unsplash.com/photo-1574785307382-4d0bd7a4ebf5?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" data-category="kegiatan" data-sub-html="<h4>Budidaya Ikan</h4><p>Kolam budidaya ikan air tawar di Dusun Damai</p>">
+                    <img src="https://images.unsplash.com/photo-1574785307382-4d0bd7a4ebf5?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Budidaya Ikan">
+                    <div class="gallery-overlay">
+                        <h3>Budidaya Ikan</h3>
+                        <p>Dusun Damai</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Tentang Desa</h3>
+                    <p><strong>Desa Pematang Setrak</strong> adalah desa yang terletak di Kecamatan Kualuh Hulu, Kabupaten Labuhanbatu Utara, Provinsi Sumatera Utara. Kami berkomitmen membangun desa yang transparan, informatif, dan inovatif melalui teknologi digital untuk pelayanan yang lebih baik kepada masyarakat.</p>
+                </div>
+                <div class="footer-column">
+                    <h3>Navigasi Cepat</h3>
+                    <ul>
+                        <li><a href="index.html">Beranda</a></li>
+                        <li><a href="about.html">Profil Desa</a></li>
+                        <li><a href="government.html">Pemerintahan</a></li>
+                        <li><a href="potentials.html">Potensi Desa</a></li>
+                        <li><a href="news.html">Berita Utama</a></li>
+                        <li><a href="gallery.html">Galeri</a></li>
+                        <li><a href="contact.html">Kontak</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Kontak & Media Sosial</h3>
+                    <ul class="contact-info">
+                        <li><i class="fas fa-envelope"></i> desapematangsetrak@gmail.com</li>
+                        <li><i class="fab fa-whatsapp"></i> 0812-3456-7890</li>
+                        <li><i class="fas fa-map-marker-alt"></i> Jl. Besar Pematang Setrak No. 01, Kualuh Hulu, Labuhanbatu Utara</li>
+                    </ul>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>© 2025 Desa Pematang Setrak. Seluruh hak cipta dilindungi undang-undang.</p>
+                <p>Dibangun dengan dedikasi untuk keterbukaan informasi dan pelayanan masyarakat desa.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="assets/js/script.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/2.7.1/lightgallery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+        // Inisialisasi AOS (Animate On Scroll)
+        AOS.init({
+            duration: 800,
+            once: true
+        });
+        
+        // Inisialisasi LightGallery
+        const gallery = lightGallery(document.getElementById('gallery-container'), {
+            selector: '.gallery-item',
+            download: false,
+            zoom: true,
+            counter: false
+        });
+        
+        // Filter Galeri
+        $(document).ready(function(){
+            $('.filter-btn').click(function(){
+                // Hapus active class dari semua tombol
+                $('.filter-btn').removeClass('active');
+                // Tambahkan active class ke tombol yang diklik
+                $(this).addClass('active');
+                
+                const filterValue = $(this).attr('data-filter');
+                
+                // Jika memilih "all", tampilkan semua item
+                if(filterValue === 'all') {
+                    $('.gallery-item').show();
+                } 
+                // Jika memilih kategori tertentu
+                else {
+                    // Sembunyikan semua item
+                    $('.gallery-item').hide();
+                    // Tampilkan item dengan kategori yang sesuai
+                    $(`.gallery-item[data-category="${filterValue}"]`).show();
+                }
+            });
+        });
+    </script>
+</body>
+</html>

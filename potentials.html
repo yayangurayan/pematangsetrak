@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Potensi Desa Pematang Setrak</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/animations.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Tambahan style khusus untuk halaman potensi desa */
+        .potensi-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 40px;
+        }
+        
+        .potensi-card {
+            background: var(--white);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .potensi-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+        }
+        
+        .potensi-icon {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 60px;
+            height: 60px;
+            background: var(--yellow);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            color: var(--dark-green);
+            z-index: 2;
+        }
+        
+        .potensi-image {
+            height: 250px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .potensi-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .potensi-card:hover .potensi-image img {
+            transform: scale(1.1);
+        }
+        
+        .potensi-content {
+            padding: 30px;
+        }
+        
+        .potensi-content h3 {
+            color: var(--dark-green);
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+        }
+        
+        .potensi-content p {
+            color: var(--gray);
+            margin-bottom: 20px;
+        }
+        
+        .breadcrumb-section {
+            background-color: var(--light-gray);
+            padding: 20px 0;
+            margin-top: 80px;
+        }
+        
+        .breadcrumb {
+            display: flex;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .breadcrumb-item {
+            font-size: 0.9rem;
+            color: var(--gray);
+        }
+        
+        .breadcrumb-item + .breadcrumb-item::before {
+            content: '/';
+            padding: 0 10px;
+            color: var(--gray);
+        }
+        
+        .breadcrumb-item a {
+            color: var(--dark-green);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .breadcrumb-item a:hover {
+            color: var(--light-green);
+            text-decoration: underline;
+        }
+        
+        .breadcrumb-item.active {
+            color: var(--dark-gray);
+        }
+        
+        .category-title {
+            text-align: center;
+            margin: 80px 0 40px;
+            position: relative;
+        }
+        
+        .category-title h2 {
+            display: inline-block;
+            background: var(--white);
+            padding: 0 20px;
+            position: relative;
+            z-index: 1;
+            color: var(--dark-green);
+        }
+        
+        .category-title::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: var(--yellow);
+            z-index: 0;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header dan Navigasi -->
+    <header class="sticky-header">
+        <div class="container">
+            <div class="logo">
+                <h1>Desa Pematang Setrak</h1>
+            </div>
+            <nav>
+                <ul class="nav-menu">
+                    <li><a href="index.html">Beranda</a></li>
+                    <li>
+                        <a href="about.html">Tentang Desa <i class="fas fa-chevron-down"></i></a>
+                        <ul class="dropdown">
+                            <li><a href="about.html#sejarah">Sejarah Desa</a></li>
+                            <li><a href="about.html#visi-misi">Visi dan Misi</a></li>
+                            <li><a href="about.html#profil-wilayah">Profil Wilayah</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="government.html">Pemerintahan</a></li>
+                    <li class="active"><a href="potentials.html">Potensi Desa</a></li>
+                    <li><a href="news.html">Berita Utama</a></li>
+                    <li><a href="gallery.html">Galeri</a></li>
+                    <li><a href="contact.html">Kontak</a></li>
+                </ul>
+                <div class="hamburger">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Breadcrumb -->
+    <section class="breadcrumb-section">
+        <div class="container">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="index.html">Beranda</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Potensi Desa</li>
+                </ol>
+            </nav>
+        </div>
+    </section>
+
+    <!-- Page Title -->
+    <section class="page-title-section">
+        <div class="container">
+            <h1 data-aos="fade-up">Potensi Desa</h1>
+            <p data-aos="fade-up" data-aos-delay="100">Mengenal berbagai potensi unggulan yang dimiliki Desa Pematang Setrak</p>
+        </div>
+    </section>
+
+    <!-- Potensi Pertanian -->
+    <section class="section">
+        <div class="container">
+            <div class="category-title" data-aos="fade-up">
+                <h2>Potensi Pertanian</h2>
+            </div>
+            
+            <div class="potensi-cards">
+                <div class="potensi-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="potensi-icon">
+                        <i class="fas fa-tractor"></i>
+                    </div>
+                    <div class="potensi-image">
+                        <img src="https://images.unsplash.com/photo-1492496913980-501348b61469?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Pertanian Desa">
+                    </div>
+                    <div class="potensi-content">
+                        <h3>Pertanian Modern</h3>
+                        <p>Mayoritas penduduk Desa Pematang Setrak menggantungkan hidup dari sektor pertanian. Komoditas utama yang dihasilkan adalah kelapa sawit, karet, dan jagung. Lahan pertanian tersebar di hampir seluruh wilayah dusun, terutama di Dusun Suka Makmur dan Setrak Jaya.</p>
+                        <p>Desa juga memiliki kelompok tani aktif yang tergabung dalam program penyuluhan dari dinas terkait, serta sedang dikembangkan program pertanian berkelanjutan.</p>
+                    </div>
+                </div>
+                
+                <div class="potensi-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="potensi-icon">
+                        <i class="fas fa-tree"></i>
+                    </div>
+                    <div class="potensi-image">
+                        <img src="https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Perkebunan Sawit">
+                    </div>
+                    <div class="potensi-content">
+                        <h3>Perkebunan Kelapa Sawit</h3>
+                        <p>Kelapa sawit menjadi komoditas utama perkebunan di Desa Pematang Setrak. Dengan luas lahan mencapai 1.200 hektar, perkebunan kelapa sawit memberikan kontribusi besar terhadap perekonomian desa.</p>
+                        <p>Produktivitas sawit terus meningkat berkat program pemupukan dan perawatan yang intensif oleh kelompok tani setempat.</p>
+                    </div>
+                </div>
+                
+                <div class="potensi-card" data-aos="fade-up" data-aos-delay="300">
+                    <div class="potensi-icon">
+                        <i class="fas fa-leaf"></i>
+                    </div>
+                    <div class="potensi-image">
+                        <img src="https://images.unsplash.com/photo-1603732551681-2e91159b9dc2?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Perkebunan Karet">
+                    </div>
+                    <div class="potensi-content">
+                        <h3>Perkebunan Karet</h3>
+                        <p>Selain sawit, karet juga menjadi komoditas andalan Desa Pematang Setrak. Perkebunan karet tersebar di daerah perbukitan dengan total luas sekitar 800 hektar.</p>
+                        <p>Produksi getah karet desa ini terkenal memiliki kualitas tinggi dan menjadi salah satu pemasok utama pabrik pengolahan karet di kabupaten.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Potensi Perikanan -->
+    <section class="section" style="background-color: var(--light-gray);">
+        <div class="container">
+            <div class="category-title" data-aos="fade-up">
+                <h2>Potensi Perikanan</h2>
+            </div>
+            
+            <div class="potensi-cards">
+                <div class="potensi-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="potensi-icon">
+                        <i class="fas fa-fish"></i>
+                    </div>
+                    <div class="potensi-image">
+                        <img src="https://images.unsplash.com/photo-1574785307382-4d0bd7a4ebf5?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Perikanan Desa">
+                    </div>
+                    <div class="potensi-content">
+                        <h3>Budidaya Ikan Air Tawar</h3>
+                        <p>Perikanan air tawar berkembang pesat dalam beberapa tahun terakhir. Kolam-kolam ikan nila, lele, dan patin banyak ditemukan di Dusun Damai.</p>
+                        <p>Kegiatan ini menjadi alternatif sumber pendapatan warga dan menjadi salah satu bidang unggulan yang akan terus didorong melalui pelatihan dan bantuan bibit.</p>
+                    </div>
+                </div>
+                
+                <div class="potensi-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="potensi-icon">
+                        <i class="fas fa-water"></i>
+                    </div>
+                    <div class="potensi-image">
+                        <img src="https://images.unsplash.com/photo-1548345680-f5475ea5a84d?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Ikan Nila">
+                    </div>
+                    <div class="potensi-content">
+                        <h3>Budidaya Ikan Nila</h3>
+                        <p>Ikan nila menjadi salah satu komoditas utama budidaya perikanan di Desa Pematang Setrak. Dengan teknologi budidaya yang semakin modern, produksi ikan nila terus meningkat setiap tahunnya.</p>
+                        <p>Ikan nila dari desa ini telah dipasarkan hingga ke pasar regional dan menjadi sumber pendapatan penting bagi masyarakat Dusun Damai.</p>
+                    </div>
+                </div>
+                
+                <div class="potensi-card" data-aos="fade-up" data-aos-delay="300">
+                    <div class="potensi-icon">
+                        <i class="fas fa-drumstick-bite"></i>
+                    </div>
+                    <div class="potensi-image">
+                        <img src="https://images.unsplash.com/photo-1592417817098-8fd3d9cb3c6f?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Ikan Lele">
+                    </div>
+                    <div class="potensi-content">
+                        <h3>Budidaya Ikan Lele</h3>
+                        <p>Budidaya ikan lele dilakukan secara intensif dengan sistem bioflok yang menghasilkan produktivitas tinggi dalam lahan terbatas.</p>
+                        <p>Ikan lele dari Desa Pematang Setrak telah menjadi pemasok utama untuk warung-warung makan dan rumah makan di sekitar kecamatan.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Potensi UMKM -->
+    <section class="section">
+        <div class="container">
+            <div class="category-title" data-aos="fade-up">
+                <h2>UMKM dan Ekonomi Kreatif</h2>
+            </div>
+            
+            <div class="potensi-cards">
+                <div class="potensi-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="potensi-icon">
+                        <i class="fas fa-utensils"></i>
+                    </div>
+                    <div class="potensi-image">
+                        <img src="https://images.unsplash.com/photo-1606491956689-2ea866880c84?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Makanan Ringan">
+                    </div>
+                    <div class="potensi-content">
+                        <h3>Makanan Ringan Lokal</h3>
+                        <p>Desa Pematang Setrak memiliki beberapa pelaku UMKM yang bergerak di bidang makanan ringan lokal. Produk seperti keripik pisang, kerupuk udang, dan emping melinjo menjadi komoditas lokal yang mulai dikenal di desa tetangga.</p>
+                        <p>Produk-produk ini dibuat dengan bahan baku lokal dan resep turun temurun yang khas.</p>
+                    </div>
+                </div>
+                
+                <div class="potensi-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="potensi-icon">
+                        <i class="fas fa-tshirt"></i>
+                    </div>
+                    <div class="potensi-image">
+                        <img src="https://images.unsplash.com/photo-1604176354204-9268737828e4?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Kerajinan Tangan">
+                    </div>
+                    <div class="potensi-content">
+                        <h3>Kerajinan Tangan</h3>
+                        <p>Kerajinan tangan dari bahan alam seperti rotan, pandan, dan bambu menjadi salah satu produk unggulan UMKM Desa Pematang Setrak.</p>
+                        <p>Produk seperti tas, topi, dan anyaman lainnya dibuat dengan teknik tradisional dan desain modern yang menarik minat konsumen.</p>
+                    </div>
+                </div>
+                
+                <div class="potensi-card" data-aos="fade-up" data-aos-delay="300">
+                    <div class="potensi-icon">
+                        <i class="fas fa-soap"></i>
+                    </div>
+                    <div class="potensi-image">
+                        <img src="https://images.unsplash.com/photo-1600857544200-b2f666a9a2ec?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Sabun Herbal">
+                    </div>
+                    <div class="potensi-content">
+                        <h3>Produk Herbal</h3>
+                        <p>Sabun herbal dan minyak esensial menjadi produk inovasi baru dari UMKM Desa Pematang Setrak. Produk ini memanfaatkan tanaman herbal yang banyak tumbuh di wilayah desa.</p>
+                        <p>Dengan pemasaran digital, produk herbal desa ini mulai dikenal dan diminati oleh konsumen dari berbagai daerah.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Potensi Wisata -->
+    <section class="section" style="background-color: var(--light-gray);">
+        <div class="container">
+            <div class="category-title" data-aos="fade-up">
+                <h2>Potensi Wisata dan Budaya</h2>
+            </div>
+            
+            <div class="potensi-cards">
+                <div class="potensi-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="potensi-icon">
+                        <i class="fas fa-mountain"></i>
+                    </div>
+                    <div class="potensi-image">
+                        <img src="https://images.unsplash.com/photo-1473448912268-2022ce9509d8?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Wisata Alam">
+                    </div>
+                    <div class="potensi-content">
+                        <h3>Wisata Alam</h3>
+                        <p>Desa memiliki potensi wisata berbasis alam seperti area persawahan yang luas, sungai kecil yang asri, dan perbukitan dengan pemandangan indah.</p>
+                        <p>Beberapa spot telah dikembangkan menjadi area berkemah dan tempat bersantai untuk menikmati keindahan alam desa.</p>
+                    </div>
+                </div>
+                
+                <div class="potensi-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="potensi-icon">
+                        <i class="fas fa-mask"></i>
+                    </div>
+                    <div class="potensi-image">
+                        <img src="https://images.unsplash.com/photo-1511818966892-d7d671e672a2?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Budaya Desa">
+                    </div>
+                    <div class="potensi-content">
+                        <h3>Budaya dan Tradisi</h3>
+                        <p>Kegiatan gotong royong, lomba panjat pinang, dan festival seni tradisional menjadi daya tarik tersendiri bagi wisatawan.</p>
+                        <p>Desa juga memiliki kegiatan budaya tahunan seperti Sedekah Kampung yang menjadi ajang silaturahmi dan pelestarian budaya lokal.</p>
+                    </div>
+                </div>
+                
+                <div class="potensi-card" data-aos="fade-up" data-aos-delay="300">
+                    <div class="potensi-icon">
+                        <i class="fas fa-utensils"></i>
+                    </div>
+                    <div class="potensi-image">
+                        <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Kuliner Desa">
+                    </div>
+                    <div class="potensi-content">
+                        <h3>Kuliner Desa</h3>
+                        <p>Wisata kuliner mulai dikembangkan dengan menawarkan makanan khas desa seperti sate kelinci, gulai ikan patin, dan berbagai olahan hasil pertanian lokal.</p>
+                        <p>Pengunjung dapat menikmati makanan khas sambil menikmati suasana pedesaan yang asri dan menenangkan.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Tentang Desa</h3>
+                    <p><strong>Desa Pematang Setrak</strong> adalah desa yang terletak di Kecamatan Kualuh Hulu, Kabupaten Labuhanbatu Utara, Provinsi Sumatera Utara. Kami berkomitmen membangun desa yang transparan, informatif, dan inovatif melalui teknologi digital untuk pelayanan yang lebih baik kepada masyarakat.</p>
+                </div>
+                <div class="footer-column">
+                    <h3>Navigasi Cepat</h3>
+                    <ul>
+                        <li><a href="index.html">Beranda</a></li>
+                        <li><a href="about.html">Profil Desa</a></li>
+                        <li><a href="government.html">Pemerintahan</a></li>
+                        <li><a href="potentials.html">Potensi Desa</a></li>
+                        <li><a href="news.html">Berita Utama</a></li>
+                        <li><a href="gallery.html">Galeri</a></li>
+                        <li><a href="contact.html">Kontak</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Kontak & Media Sosial</h3>
+                    <ul class="contact-info">
+                        <li><i class="fas fa-envelope"></i> desapematangsetrak@gmail.com</li>
+                        <li><i class="fab fa-whatsapp"></i> 0812-3456-7890</li>
+                        <li><i class="fas fa-map-marker-alt"></i> Jl. Besar Pematang Setrak No. 01, Kualuh Hulu, Labuhanbatu Utara</li>
+                    </ul>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>© 2025 Desa Pematang Setrak. Seluruh hak cipta dilindungi undang-undang.</p>
+                <p>Dibangun dengan dedikasi untuk keterbukaan informasi dan pelayanan masyarakat desa.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="assets/js/script.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        // Inisialisasi AOS (Animate On Scroll)
+        AOS.init({
+            duration: 800,
+            once: true
+        });
+    </script>
+</body>
+</html>

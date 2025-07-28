@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Berita Utama Desa Pematang Setrak</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/animations.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Tambahan style khusus untuk halaman berita */
+        .news-detail {
+            background: var(--white);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            margin-bottom: 50px;
+        }
+        
+        .news-header {
+            padding: 40px;
+            text-align: center;
+            background: linear-gradient(to right, var(--dark-green), var(--light-green));
+            color: var(--white);
+        }
+        
+        .news-header h1 {
+            font-size: 2.2rem;
+            margin-bottom: 15px;
+        }
+        
+        .news-meta {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+        
+        .news-meta i {
+            margin-right: 5px;
+        }
+        
+        .news-image {
+            height: 500px;
+            overflow: hidden;
+        }
+        
+        .news-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+        
+        .news-content {
+            padding: 50px;
+        }
+        
+        .news-content p {
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+        
+        .news-content blockquote {
+            border-left: 4px solid var(--dark-green);
+            padding-left: 20px;
+            margin: 30px 0;
+            font-style: italic;
+            color: var(--gray);
+        }
+        
+        .other-news {
+            margin-top: 50px;
+        }
+        
+        .other-news h2 {
+            margin-bottom: 30px;
+            position: relative;
+            padding-bottom: 15px;
+        }
+        
+        .other-news h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 80px;
+            height: 3px;
+            background: var(--yellow);
+        }
+        
+        .other-news-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .other-news-card {
+            background: var(--white);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+        }
+        
+        .other-news-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+        
+        .other-news-image {
+            height: 200px;
+        }
+        
+        .other-news-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .other-news-content {
+            padding: 20px;
+        }
+        
+        .other-news-content h3 {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            color: var(--dark-green);
+        }
+        
+        .other-news-content p {
+            font-size: 0.9rem;
+            color: var(--gray);
+            margin-bottom: 15px;
+        }
+        
+        .other-news-content a {
+            color: var(--dark-green);
+            font-weight: 500;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+        }
+        
+        .other-news-content a i {
+            margin-left: 5px;
+            transition: transform 0.3s ease;
+        }
+        
+        .other-news-content a:hover i {
+            transform: translateX(5px);
+        }
+        
+        .breadcrumb-section {
+            background-color: var(--light-gray);
+            padding: 20px 0;
+            margin-top: 80px;
+        }
+        
+        .breadcrumb {
+            display: flex;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .breadcrumb-item {
+            font-size: 0.9rem;
+            color: var(--gray);
+        }
+        
+        .breadcrumb-item + .breadcrumb-item::before {
+            content: '/';
+            padding: 0 10px;
+            color: var(--gray);
+        }
+        
+        .breadcrumb-item a {
+            color: var(--dark-green);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .breadcrumb-item a:hover {
+            color: var(--light-green);
+            text-decoration: underline;
+        }
+        
+        .breadcrumb-item.active {
+            color: var(--dark-gray);
+        }
+    </style>
+</head>
+<body>
+    <!-- Header dan Navigasi -->
+    <header class="sticky-header">
+        <div class="container">
+            <div class="logo">
+                <h1>Desa Pematang Setrak</h1>
+            </div>
+            <nav>
+                <ul class="nav-menu">
+                    <li><a href="index.html">Beranda</a></li>
+                    <li>
+                        <a href="about.html">Tentang Desa <i class="fas fa-chevron-down"></i></a>
+                        <ul class="dropdown">
+                            <li><a href="about.html#sejarah">Sejarah Desa</a></li>
+                            <li><a href="about.html#visi-misi">Visi dan Misi</a></li>
+                            <li><a href="about.html#profil-wilayah">Profil Wilayah</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="government.html">Pemerintahan</a></li>
+                    <li><a href="potentials.html">Potensi Desa</a></li>
+                    <li class="active"><a href="news.html">Berita Utama</a></li>
+                    <li><a href="gallery.html">Galeri</a></li>
+                    <li><a href="contact.html">Kontak</a></li>
+                </ul>
+                <div class="hamburger">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Breadcrumb -->
+    <section class="breadcrumb-section">
+        <div class="container">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="index.html">Beranda</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Berita Utama</li>
+                </ol>
+            </nav>
+        </div>
+    </section>
+
+    <!-- Page Title -->
+    <section class="page-title-section">
+        <div class="container">
+            <h1 data-aos="fade-up">Berita Desa</h1>
+            <p data-aos="fade-up" data-aos-delay="100">Informasi terkini dari Desa Pematang Setrak</p>
+        </div>
+    </section>
+
+    <!-- Konten Berita -->
+    <section class="section">
+        <div class="container">
+            <div class="news-detail" data-aos="fade-up">
+                <div class="news-header">
+                    <h1>Pematang Setrak Resmi Luncurkan Website Desa Digital</h1>
+                    <div class="news-meta">
+                        <span><i class="far fa-calendar-alt"></i> 17 Juli 2025</span>
+                        <span><i class="far fa-user"></i> Admin Desa</span>
+                    </div>
+                </div>
+                
+                <div class="news-image">
+                    <img src="https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" alt="Peluncuran Website">
+                </div>
+                
+                <div class="news-content">
+                    <p>Pemerintah Desa Pematang Setrak meluncurkan website resmi sebagai sarana informasi dan komunikasi masyarakat. Website ini memuat informasi tentang pemerintahan desa, sejarah, potensi, berita, dan layanan publik. Kepala Desa Muhammad Yusuf menyampaikan bahwa website ini akan menjadi bagian dari transparansi dan kemajuan digital desa.</p>
+                    
+                    <p>Peluncuran website dilakukan pada hari Rabu, 17 Juli 2025 di Balai Desa Pematang Setrak dengan dihadiri oleh perangkat desa, tokoh masyarakat, dan perwakilan warga dari setiap dusun. Acara ini juga dihadiri oleh Camat Kualuh Hulu yang memberikan apresiasi atas inisiatif digitalisasi desa.</p>
+                    
+                    <blockquote>
+                        "Dengan hadirnya website desa, kami ingin memastikan masyarakat mudah mendapatkan informasi sekaligus mendorong keterlibatan digital seluruh warga," ujar beliau dalam sambutan peluncuran.
+                    </blockquote>
+                    
+                    <p>Website ini dirancang untuk menjadi pusat informasi resmi desa yang dapat diakses kapan saja dan di mana saja. Fitur-fitur yang tersedia meliputi profil desa, struktur pemerintahan, potensi desa, galeri kegiatan, dan informasi kontak. Di masa depan, website ini juga akan dikembangkan untuk menyediakan layanan administrasi online.</p>
+                    
+                    <p>Kepala Seksi Pelayanan, Rudi Hartono, menjelaskan bahwa website ini akan menjadi media komunikasi dua arah antara pemerintah desa dan masyarakat. "Melalui website ini, warga dapat menyampaikan aspirasi, pertanyaan, atau pengaduan secara langsung melalui kanal kontak yang tersedia," jelasnya.</p>
+                    
+                    <p>Website Desa Pematang Setrak dapat diakses melalui alamat <strong>www.pematangsetrak.desa.id</strong>. Pemerintah desa juga akan melakukan sosialisasi kepada masyarakat tentang penggunaan website ini dalam pertemuan rutin di setiap dusun.</p>
+                </div>
+            </div>
+            
+            <!-- Berita Lainnya -->
+            <div class="other-news" data-aos="fade-up">
+                <h2>Berita Lainnya</h2>
+                
+                <div class="other-news-grid">
+                    <div class="other-news-card">
+                        <div class="other-news-image">
+                            <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Musyawarah Desa">
+                        </div>
+                        <div class="other-news-content">
+                            <h3>Musyawarah Desa Bahas Program Ketahanan Pangan</h3>
+                            <p>Desa Pematang Setrak menggelar musyawarah warga untuk menyusun program ketahanan pangan berkelanjutan.</p>
+                            <a href="#">Baca Selengkapnya <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                    
+                    <div class="other-news-card">
+                        <div class="other-news-image">
+                            <img src="https://images.unsplash.com/photo-1581578021016-4b7d1a1d3c3c?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Panen Raya">
+                        </div>
+                        <div class="other-news-content">
+                            <h3>Panen Raya Kelapa Sawit Dusun Suka Makmur</h3>
+                            <p>Petani di Dusun Suka Makmur merayakan panen raya kelapa sawit dengan hasil yang memuaskan.</p>
+                            <a href="#">Baca Selengkapnya <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                    
+                    <div class="other-news-card">
+                        <div class="other-news-image">
+                            <img src="https://images.unsplash.com/photo-1548345680-f5475ea5a84d?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Budidaya Ikan">
+                        </div>
+                        <div class="other-news-content">
+                            <h3>Budidaya Ikan Nila di Dusun Damai Meningkat</h3>
+                            <p>Produksi ikan nila di Dusun Damai mengalami peningkatan signifikan berkat pelatihan intensif.</p>
+                            <a href="#">Baca Selengkapnya <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Tentang Desa</h3>
+                    <p><strong>Desa Pematang Setrak</strong> adalah desa yang terletak di Kecamatan Kualuh Hulu, Kabupaten Labuhanbatu Utara, Provinsi Sumatera Utara. Kami berkomitmen membangun desa yang transparan, informatif, dan inovatif melalui teknologi digital untuk pelayanan yang lebih baik kepada masyarakat.</p>
+                </div>
+                <div class="footer-column">
+                    <h3>Navigasi Cepat</h3>
+                    <ul>
+                        <li><a href="index.html">Beranda</a></li>
+                        <li><a href="about.html">Profil Desa</a></li>
+                        <li><a href="government.html">Pemerintahan</a></li>
+                        <li><a href="potentials.html">Potensi Desa</a></li>
+                        <li><a href="news.html">Berita Utama</a></li>
+                        <li><a href="gallery.html">Galeri</a></li>
+                        <li><a href="contact.html">Kontak</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Kontak & Media Sosial</h3>
+                    <ul class="contact-info">
+                        <li><i class="fas fa-envelope"></i> desapematangsetrak@gmail.com</li>
+                        <li><i class="fab fa-whatsapp"></i> 0812-3456-7890</li>
+                        <li><i class="fas fa-map-marker-alt"></i> Jl. Besar Pematang Setrak No. 01, Kualuh Hulu, Labuhanbatu Utara</li>
+                    </ul>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>© 2025 Desa Pematang Setrak. Seluruh hak cipta dilindungi undang-undang.</p>
+                <p>Dibangun dengan dedikasi untuk keterbukaan informasi dan pelayanan masyarakat desa.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="assets/js/script.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        // Inisialisasi AOS (Animate On Scroll)
+        AOS.init({
+            duration: 800,
+            once: true
+        });
+    </script>
+</body>
+</html>

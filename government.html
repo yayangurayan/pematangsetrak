@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pemerintahan Desa Pematang Setrak</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/animations.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Tambahan style khusus untuk halaman pemerintahan */
+        .org-chart {
+            position: relative;
+            padding: 40px 0;
+            overflow-x: auto;
+        }
+        
+        .org-level {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 60px;
+        }
+        
+        .org-node {
+            background: var(--white);
+            border: 2px solid var(--dark-green);
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            width: 220px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            position: relative;
+            z-index: 1;
+            transition: all 0.3s ease;
+        }
+        
+        .org-node:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+            border-color: var(--yellow);
+        }
+        
+        .org-node h3 {
+            color: var(--dark-green);
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+        
+        .org-node p {
+            font-size: 0.9rem;
+            color: var(--gray);
+            margin: 5px 0;
+        }
+        
+        .node-connector {
+            position: absolute;
+            height: 40px;
+            width: 2px;
+            background: var(--dark-green);
+            bottom: -40px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .horizontal-connector {
+            position: absolute;
+            height: 2px;
+            background: var(--dark-green);
+            top: 50%;
+        }
+        
+        .team-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+        
+        .team-card {
+            background: var(--white);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .team-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+        }
+        
+        .team-image {
+            height: 280px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .team-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .team-card:hover .team-image img {
+            transform: scale(1.05);
+        }
+        
+        .team-position {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(32, 78, 46, 0.9);
+            color: var(--white);
+            padding: 10px;
+            text-align: center;
+            font-weight: 500;
+        }
+        
+        .team-info {
+            padding: 20px;
+        }
+        
+        .team-info h3 {
+            color: var(--dark-green);
+            margin-bottom: 10px;
+        }
+        
+        .team-contact {
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid rgba(0, 0, 0, 0.1);
+        }
+        
+        .team-contact p {
+            display: flex;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+        
+        .team-contact i {
+            width: 25px;
+            color: var(--dark-green);
+        }
+        
+        .breadcrumb-section {
+            background-color: var(--light-gray);
+            padding: 20px 0;
+            margin-top: 80px;
+        }
+        
+        .breadcrumb {
+            display: flex;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .breadcrumb-item {
+            font-size: 0.9rem;
+            color: var(--gray);
+        }
+        
+        .breadcrumb-item + .breadcrumb-item::before {
+            content: '/';
+            padding: 0 10px;
+            color: var(--gray);
+        }
+        
+        .breadcrumb-item a {
+            color: var(--dark-green);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .breadcrumb-item a:hover {
+            color: var(--light-green);
+            text-decoration: underline;
+        }
+        
+        .breadcrumb-item.active {
+            color: var(--dark-gray);
+        }
+    </style>
+</head>
+<body>
+    <!-- Header dan Navigasi -->
+    <header class="sticky-header">
+        <div class="container">
+            <div class="logo">
+                <h1>Desa Pematang Setrak</h1>
+            </div>
+            <nav>
+                <ul class="nav-menu">
+                    <li><a href="index.html">Beranda</a></li>
+                    <li>
+                        <a href="about.html">Tentang Desa <i class="fas fa-chevron-down"></i></a>
+                        <ul class="dropdown">
+                            <li><a href="about.html#sejarah">Sejarah Desa</a></li>
+                            <li><a href="about.html#visi-misi">Visi dan Misi</a></li>
+                            <li><a href="about.html#profil-wilayah">Profil Wilayah</a></li>
+                        </ul>
+                    </li>
+                    <li class="active"><a href="government.html">Pemerintahan</a></li>
+                    <li><a href="potentials.html">Potensi Desa</a></li>
+                    <li><a href="news.html">Berita Utama</a></li>
+                    <li><a href="gallery.html">Galeri</a></li>
+                    <li><a href="contact.html">Kontak</a></li>
+                </ul>
+                <div class="hamburger">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Breadcrumb -->
+    <section class="breadcrumb-section">
+        <div class="container">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="index.html">Beranda</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Pemerintahan Desa</li>
+                </ol>
+            </nav>
+        </div>
+    </section>
+
+    <!-- Page Title -->
+    <section class="page-title-section">
+        <div class="container">
+            <h1 data-aos="fade-up">Pemerintahan Desa</h1>
+            <p data-aos="fade-up" data-aos-delay="100">Struktur organisasi dan data perangkat desa yang bertugas melayani masyarakat</p>
+        </div>
+    </section>
+
+    <!-- Struktur Pemerintahan -->
+    <section class="section struktur-section">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <h2>Struktur Pemerintahan Desa</h2>
+                <div class="divider"></div>
+                <p class="section-description">Pemerintahan Desa Pematang Setrak dipimpin oleh seorang Kepala Desa yang dibantu oleh perangkat desa, Badan Permusyawaratan Desa (BPD), dan lembaga kemasyarakatan lainnya.</p>
+            </div>
+            
+            <div class="org-chart">
+                <!-- Level 1: Kepala Desa -->
+                <div class="org-level">
+                    <div class="org-node" data-aos="fade-up">
+                        <h3>Kepala Desa</h3>
+                        <p>Muhammad Yusuf</p>
+                        <div class="node-connector"></div>
+                    </div>
+                </div>
+                
+                <!-- Level 2: Sekretaris Desa -->
+                <div class="org-level">
+                    <div class="org-node" data-aos="fade-up" data-aos-delay="100">
+                        <h3>Sekretaris Desa</h3>
+                        <p>Rini Suryani</p>
+                        <div class="node-connector"></div>
+                    </div>
+                </div>
+                
+                <!-- Level 3: Kepala Urusan -->
+                <div class="org-level">
+                    <div class="org-node" data-aos="fade-up" data-aos-delay="150">
+                        <h3>Kepala Urusan Tata Usaha & Umum</h3>
+                        <p>Budi Santoso</p>
+                        <div class="node-connector"></div>
+                    </div>
+                    
+                    <div class="org-node" data-aos="fade-up" data-aos-delay="200">
+                        <h3>Kepala Urusan Keuangan</h3>
+                        <p>Siti Rahayu</p>
+                        <div class="node-connector"></div>
+                    </div>
+                    
+                    <div class="org-node" data-aos="fade-up" data-aos-delay="250">
+                        <h3>Kepala Urusan Perencanaan</h3>
+                        <p>Agus Setiawan</p>
+                        <div class="node-connector"></div>
+                    </div>
+                </div>
+                
+                <!-- Level 4: Kepala Seksi -->
+                <div class="org-level">
+                    <div class="org-node" data-aos="fade-up" data-aos-delay="100">
+                        <h3>Kepala Seksi Pemerintahan</h3>
+                        <p>Dedi Kurniawan</p>
+                    </div>
+                    
+                    <div class="org-node" data-aos="fade-up" data-aos-delay="150">
+                        <h3>Kepala Seksi Kesejahteraan</h3>
+                        <p>Ani Fitriani</p>
+                    </div>
+                    
+                    <div class="org-node" data-aos="fade-up" data-aos-delay="200">
+                        <h3>Kepala Seksi Pelayanan</h3>
+                        <p>Rudi Hartono</p>
+                    </div>
+                </div>
+                
+                <!-- Level 5: Kepala Dusun -->
+                <div class="org-level">
+                    <div class="org-node" data-aos="fade-up" data-aos-delay="100">
+                        <h3>Kepala Dusun Suka Makmur</h3>
+                        <p>Joko Susilo</p>
+                    </div>
+                    
+                    <div class="org-node" data-aos="fade-up" data-aos-delay="150">
+                        <h3>Kepala Dusun Damai</h3>
+                        <p>Wahyu Pratama</p>
+                    </div>
+                    
+                    <div class="org-node" data-aos="fade-up" data-aos-delay="200">
+                        <h3>Kepala Dusun Setrak Jaya</h3>
+                        <p>Eko Prasetyo</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Data Perangkat Desa -->
+    <section class="section team-section" style="background-color: var(--light-gray);">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <h2>Data Perangkat Desa</h2>
+                <div class="divider"></div>
+                <p class="section-description">Berikut adalah data perangkat desa yang bertugas melayani masyarakat Desa Pematang Setrak</p>
+            </div>
+            
+            <div class="team-cards">
+                <!-- Kartu 1: Kepala Desa -->
+                <div class="team-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="team-image">
+                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Kepala Desa">
+                        <div class="team-position">Kepala Desa</div>
+                    </div>
+                    <div class="team-info">
+                        <h3>Muhammad Yusuf</h3>
+                        <p>Memimpin pemerintahan desa dan bertanggung jawab atas pelaksanaan kebijakan desa.</p>
+                        <div class="team-contact">
+                            <p><i class="fas fa-phone"></i> 0812-3456-7890</p>
+                            <p><i class="fas fa-envelope"></i> yusuf@pematangsetrak.desa.id</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Kartu 2: Sekretaris Desa -->
+                <div class="team-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="team-image">
+                        <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Sekretaris Desa">
+                        <div class="team-position">Sekretaris Desa</div>
+                    </div>
+                    <div class="team-info">
+                        <h3>Rini Suryani</h3>
+                        <p>Membantu kepala desa dalam pelaksanaan administrasi pemerintahan desa.</p>
+                        <div class="team-contact">
+                            <p><i class="fas fa-phone"></i> 0813-4567-8901</p>
+                            <p><i class="fas fa-envelope"></i> rini@pematangsetrak.desa.id</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Kartu 3: Kepala Urusan Tata Usaha -->
+                <div class="team-card" data-aos="fade-up" data-aos-delay="300">
+                    <div class="team-image">
+                        <img src="https://images.unsplash.com/photo-1552058544-f2b08422138a?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Kepala Urusan Tata Usaha">
+                        <div class="team-position">Kepala Urusan Tata Usaha & Umum</div>
+                    </div>
+                    <div class="team-info">
+                        <h3>Budi Santoso</h3>
+                        <p>Bertanggung jawab atas tata usaha dan administrasi umum desa.</p>
+                        <div class="team-contact">
+                            <p><i class="fas fa-phone"></i> 0814-5678-9012</p>
+                            <p><i class="fas fa-envelope"></i> budi@pematangsetrak.desa.id</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Kartu 4: Kepala Urusan Keuangan -->
+                <div class="team-card" data-aos="fade-up" data-aos-delay="400">
+                    <div class="team-image">
+                        <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Kepala Urusan Keuangan">
+                        <div class="team-position">Kepala Urusan Keuangan</div>
+                    </div>
+                    <div class="team-info">
+                        <h3>Siti Rahayu</h3>
+                        <p>Mengelola keuangan desa dan bertanggung jawab atas laporan keuangan.</p>
+                        <div class="team-contact">
+                            <p><i class="fas fa-phone"></i> 0815-6789-0123</p>
+                            <p><i class="fas fa-envelope"></i> siti@pematangsetrak.desa.id</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Kartu 5: Kepala Seksi Pemerintahan -->
+                <div class="team-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="team-image">
+                        <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Kepala Seksi Pemerintahan">
+                        <div class="team-position">Kepala Seksi Pemerintahan</div>
+                    </div>
+                    <div class="team-info">
+                        <h3>Dedi Kurniawan</h3>
+                        <p>Menangani urusan pemerintahan, kependudukan, dan catatan sipil.</p>
+                        <div class="team-contact">
+                            <p><i class="fas fa-phone"></i> 0816-7890-1234</p>
+                            <p><i class="fas fa-envelope"></i> dedi@pematangsetrak.desa.id</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Kartu 6: Kepala Seksi Kesejahteraan -->
+                <div class="team-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="team-image">
+                        <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Kepala Seksi Kesejahteraan">
+                        <div class="team-position">Kepala Seksi Kesejahteraan</div>
+                    </div>
+                    <div class="team-info">
+                        <h3>Ani Fitriani</h3>
+                        <p>Menangani urusan kesejahteraan masyarakat, kesehatan, dan pendidikan.</p>
+                        <div class="team-contact">
+                            <p><i class="fas fa-phone"></i> 0817-8901-2345</p>
+                            <p><i class="fas fa-envelope"></i> ani@pematangsetrak.desa.id</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Tentang Desa</h3>
+                    <p><strong>Desa Pematang Setrak</strong> adalah desa yang terletak di Kecamatan Kualuh Hulu, Kabupaten Labuhanbatu Utara, Provinsi Sumatera Utara. Kami berkomitmen membangun desa yang transparan, informatif, dan inovatif melalui teknologi digital untuk pelayanan yang lebih baik kepada masyarakat.</p>
+                </div>
+                <div class="footer-column">
+                    <h3>Navigasi Cepat</h3>
+                    <ul>
+                        <li><a href="index.html">Beranda</a></li>
+                        <li><a href="about.html">Profil Desa</a></li>
+                        <li><a href="government.html">Pemerintahan</a></li>
+                        <li><a href="potentials.html">Potensi Desa</a></li>
+                        <li><a href="news.html">Berita Utama</a></li>
+                        <li><a href="gallery.html">Galeri</a></li>
+                        <li><a href="contact.html">Kontak</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Kontak & Media Sosial</h3>
+                    <ul class="contact-info">
+                        <li><i class="fas fa-envelope"></i> desapematangsetrak@gmail.com</li>
+                        <li><i class="fab fa-whatsapp"></i> 0812-3456-7890</li>
+                        <li><i class="fas fa-map-marker-alt"></i> Jl. Besar Pematang Setrak No. 01, Kualuh Hulu, Labuhanbatu Utara</li>
+                    </ul>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>© 2025 Desa Pematang Setrak. Seluruh hak cipta dilindungi undang-undang.</p>
+                <p>Dibangun dengan dedikasi untuk keterbukaan informasi dan pelayanan masyarakat desa.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="assets/js/script.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        // Inisialisasi AOS (Animate On Scroll)
+        AOS.init({
+            duration: 800,
+            once: true
+        });
+    </script>
+</body>
+</html>
