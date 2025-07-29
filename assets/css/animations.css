@@ -1,0 +1,341 @@
+/* ===========================================
+   ANIMATIONS CSS
+   Sesuai Web Design Document Desa Pematang Setrak
+   =========================================== */
+
+/* Animasi Dasar */
+.animated {
+    animation-duration: 1s;
+    animation-fill-mode: both;
+}
+
+/* Fade In */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.fadeIn {
+    animation-name: fadeIn;
+}
+
+/* Fade In Up */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.fadeInUp {
+    animation-name: fadeInUp;
+}
+
+/* Fade In Down */
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.fadeInDown {
+    animation-name: fadeInDown;
+}
+
+/* Fade In Left */
+@keyframes fadeInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.fadeInLeft {
+    animation-name: fadeInLeft;
+}
+
+/* Fade In Right */
+@keyframes fadeInRight {
+    from {
+        opacity: 0;
+        transform: translateX(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.fadeInRight {
+    animation-name: fadeInRight;
+}
+
+/* Zoom In */
+@keyframes zoomIn {
+    from {
+        opacity: 0;
+        transform: scale3d(0.3, 0.3, 0.3);
+    }
+    50% { opacity: 1; }
+}
+
+.zoomIn {
+    animation-name: zoomIn;
+}
+
+/* Slide In Up */
+@keyframes slideInUp {
+    from {
+        transform: translateY(100%);
+        visibility: visible;
+    }
+    to {
+        transform: translateY(0);
+    }
+}
+
+.slideInUp {
+    animation-name: slideInUp;
+}
+
+/* Slide In Down */
+@keyframes slideInDown {
+    from {
+        transform: translateY(-100%);
+        visibility: visible;
+    }
+    to {
+        transform: translateY(0);
+    }
+}
+
+.slideInDown {
+    animation-name: slideInDown;
+}
+
+/* Slide In Left */
+@keyframes slideInLeft {
+    from {
+        transform: translateX(-100%);
+        visibility: visible;
+    }
+    to {
+        transform: translateX(0);
+    }
+}
+
+.slideInLeft {
+    animation-name: slideInLeft;
+}
+
+/* Slide In Right */
+@keyframes slideInRight {
+    from {
+        transform: translateX(100%);
+        visibility: visible;
+    }
+    to {
+        transform: translateX(0);
+    }
+}
+
+.slideInRight {
+    animation-name: slideInRight;
+}
+
+/* Animasi Hover */
+/* Efek hover menu navigasi */
+.nav-menu li a {
+    position: relative;
+    transition: color 0.3s ease;
+}
+
+.nav-menu li a::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: var(--dark-green);
+    transition: width 0.3s ease;
+}
+
+.nav-menu li a:hover::after,
+.nav-menu li.active a::after {
+    width: 100%;
+}
+
+/* Efek hover tombol */
+.btn {
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.btn::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 100%;
+    background: var(--white);
+    transition: width 0.5s ease;
+    z-index: -1;
+}
+
+.btn:hover::after {
+    width: 100%;
+}
+
+/* Efek hover kartu */
+.news-card:hover, 
+.team-card:hover, 
+.potensi-card:hover,
+.gallery-item:hover,
+.dusun-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+}
+
+/* Animasi ikon informasi cepat */
+.info-card .icon-circle {
+    transition: transform 0.5s ease, background 0.3s ease;
+}
+
+.info-card:hover .icon-circle {
+    transform: rotateY(180deg) scale(1.1);
+    background: var(--yellow);
+}
+
+/* Animasi gambar */
+.profil-image img,
+.news-image img,
+.team-image img,
+.potensi-image img,
+.gallery-item img {
+    transition: transform 0.5s ease;
+}
+
+.profil-image:hover img,
+.news-card:hover .news-image img,
+.team-card:hover .team-image img,
+.potensi-card:hover .potensi-image img,
+.gallery-item:hover img {
+    transform: scale(1.05);
+}
+
+/* Animasi overlay galeri */
+.gallery-overlay,
+.gallery-item .overlay {
+    transition: transform 0.3s ease;
+}
+
+.gallery-item:hover .gallery-overlay,
+.gallery-item:hover .overlay {
+    transform: translateY(0);
+}
+
+/* Animasi scroll-triggered dengan delay */
+[data-aos-delay="100"] {
+    animation-delay: 0.1s;
+}
+
+[data-aos-delay="200"] {
+    animation-delay: 0.2s;
+}
+
+[data-aos-delay="300"] {
+    animation-delay: 0.3s;
+}
+
+[data-aos-delay="400"] {
+    animation-delay: 0.4s;
+}
+
+[data-aos-delay="500"] {
+    animation-delay: 0.5s;
+}
+
+/* Animasi khusus untuk struktur organisasi */
+.org-node {
+    transition: all 0.3s ease;
+}
+
+/* Animasi untuk filter galeri */
+.filter-btn {
+    transition: all 0.3s ease;
+}
+
+/* Animasi untuk breadcrumb */
+.breadcrumb-item a {
+    position: relative;
+}
+
+.breadcrumb-item a::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background: var(--light-green);
+    transition: width 0.3s ease;
+}
+
+.breadcrumb-item a:hover::after {
+    width: 100%;
+}
+
+/* Animasi untuk ikon media sosial */
+.social-icons a {
+    transition: all 0.3s ease;
+}
+
+/* Animasi untuk tombol WhatsApp */
+.whatsapp-btn {
+    transition: all 0.3s ease;
+}
+
+/* Animasi untuk tab tentang desa */
+.about-nav a {
+    transition: all 0.3s ease;
+}
+
+/* Animasi untuk daftar misi */
+.mission-list li {
+    opacity: 0;
+    transform: translateX(-20px);
+    animation: fadeInLeft 0.5s forwards;
+}
+
+.mission-list li:nth-child(1) { animation-delay: 0.1s; }
+.mission-list li:nth-child(2) { animation-delay: 0.2s; }
+.mission-list li:nth-child(3) { animation-delay: 0.3s; }
+.mission-list li:nth-child(4) { animation-delay: 0.4s; }
+.mission-list li:nth-child(5) { animation-delay: 0.5s; }
+
+/* Animasi untuk loading halaman */
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+.loading-animation {
+    animation: pulse 2s infinite;
+}
